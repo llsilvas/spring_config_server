@@ -1,0 +1,26 @@
+services:
+  spring-config-server:
+    image: spring-config-server:latest
+    container_name: spring-config-server
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.5'
+          memory: 128M
+    ports:
+      - 8888:8888
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - SPRING_RABBITMQ_HOST=${SPRING_RABBITMQ_HOST}
+      - GIT_USERNAME=${GIT_USERNAME}
+      - GIT_PASSWORD=${GIT_PASSWORD}
+      - LOKI_URL="loki"
+    restart: unless-stopped
+    networks:
+      - labs
+networks:
+  labs:
+    external: true
