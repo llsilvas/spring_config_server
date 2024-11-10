@@ -41,7 +41,7 @@
         </appender>
     </springProfile>
 
-    <springProfile name="default, local">
+    <springProfile name="default, local, native">
         <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
             <!-- (1) -->
             <http>

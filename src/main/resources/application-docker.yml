@@ -3,7 +3,9 @@ spring:
     config:
       server:
         git:
+          default-label: main
           uri: https://github.com/llsilvas/spring_config_repo.git
-          username: ${GIT_USERNAME}
-          password: ${GIT_PASSWORD}
+          search-paths: /{application}
+          clone-on-start: true
+          force-pull: true
 

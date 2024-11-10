@@ -1,13 +1,11 @@
 package br.dev.leandro.spring.cloud;
 
 import jakarta.annotation.PostConstruct;
-import lombok.Data;
 import lombok.extern.java.Log;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 
-import java.util.Date;
 import java.util.TimeZone;
 
 @Log

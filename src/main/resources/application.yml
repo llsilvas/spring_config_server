@@ -3,34 +3,16 @@ server:
 spring:
   application:
     name: spring-config-server
-  cloud:
-    config:
-      server:
-        git:
-          search-paths: /{application}
-          clone-on-start: true
-          force-pull: true
-        default-label: main
-    bus:
-      enabled: true
-    stream:
-      default-binder: rabbit
-      bindings:
-        springCloudBusOutput:
-          destination: springCloudBus
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST:localhost}
     port: 5672
     connection-timeout: 5
 
-
-logging:
-  level:
-    org.springframework.web: INFO
-    org.springframework.boot: INFO
-    org.springframework.cloud: INFO
-    org.springframework.cloud.config: INFO
-    com.github.loki4j.logback: INFO
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${KEYCLOAK_URL:localhost:8090}/realms/myrealm/protocol/openid-connect/certs
 
 management:
   info:
@@ -40,7 +22,7 @@ management:
       enabled: true
     java:
       enabled: true
-  endpoint:
+  endpoints:
     health:
       probes:
         enabled: true
@@ -48,18 +30,27 @@ management:
         enabled: true
       show-details: always
     env:
-      post:
-        enabled: true
+      enabled: true  # Ajuste conforme necessário
     prometheus:
       enabled: true
-  endpoints:
     web:
       exposure:
-        include: '*'
+        include: ["*"]
       base-path: /infra/config/actuator
   metrics:
-    jvm: true
+    enable:
+      jvm: true
   prometheus:
     metrics:
       export:
         enabled: true
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.boot: INFO
+    org.springframework.cloud: INFO
+    org.springframework.cloud.config: INFO
+    com.github.loki4j.logback: INFO
+    org.springframework.security: INFO
+    org.springframework.cloud.bus: INFO

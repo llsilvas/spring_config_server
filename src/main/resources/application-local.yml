@@ -1,9 +1,0 @@
-spring:
-  cloud:
-    config:
-      server:
-        git:
-          uri: file://${HOME}/Dev/workspace/Leandro-Labs/spring_config_repo/
-
-
-
